@@ -10,12 +10,17 @@ end
 
 # get names
 names = page.css("a[class=business-name]").each do |nm|
-  b_names = {:name => nm.content}
-  puts b_names
+  $b_names = {:name => nm.content}
+  puts $b_names
   end
 
-# get names and phone numbers
+# get phone numbers
 phones = page.css("div.phones.phone.primary").each do |ph|
-  b_phones = {:phone => ph.content}
-  puts b_phones
+  $b_phones = {:phone => ph.content}
+  puts $b_phones
   end
+
+puts $b_names
+
+# Recursive, Nested Pairs..."heirerachy" to design of Pairs
+# http://stackoverflow.com/questions/9279768/how-do-i-loop-over-a-hash-of-hashes-in-ruby
