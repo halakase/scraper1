@@ -17,5 +17,6 @@ CSV.parse(csv) do |row|
         i += 1
     end
     puts new_csv
-    
+    # write to file
+    # CSV.open("data.csv", "wb") {|csv| new_csv.to_a.each {|elem| csv << elem} }
 end
