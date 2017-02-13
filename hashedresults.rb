@@ -39,12 +39,3 @@ CSV.open("data.csv", "wb", headers: :first_row) do |csv|
   csv << bz.values_at(*headers)
 end
 end
-
-=begin
-# w mode on CSV open clears previous content
-CSV.open("data.csv", "wb") do |csv|
-  csv << HEADERS.map { |h| @businesses }
-  csv << "\n"
-  f.write(csv)
-end
-=end
