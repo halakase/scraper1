@@ -16,12 +16,13 @@ page.css('title').each do |el|
 end
 
 
-
+=begin
 # get names
 names = page.css("a[class=business-name]")
 names.each do |el|
   puts el.text
 end
+=end
 
 =begin
 # get addresses
@@ -29,20 +30,33 @@ address = page.css("p[class=adr]")
 address.each do |el|
   puts el.text
 end
+=end
 
+=begin
 # get phones
 phones = page.css("div.phones.phone.primary")
 phones.each do |el|
   puts el.text
 end
+=end
 
 # get websites
+=begin
 websites = page.css("div.links a")
 websites.each{|link| puts "#{link['href']}"}
-websites.each do |el|
-  puts el.text
+=end
+
+@webnames = Array.new
+websites = page.css("div.links a").map{|link| "#{link['href']}"}
+websites.each do |bw|
+  @webnames << {:webn => bw }
 end
 
+# puts websites
+puts @webnames
+
+
+=begin
 # write into structures
 # Create Struct To Hold Everything
 # Company.new("Page", :businessname, :address, :phones, :websites)
@@ -66,6 +80,7 @@ company_info = page.css("div.info").map{ |company|
   }
 =end
 
+=begin
 company_info = page.css("div.info").map{ |company|
     [
       'businessname', company.at("a[class=business-name]").content
@@ -73,6 +88,7 @@ company_info = page.css("div.info").map{ |company|
       # 'Phone', company.at("div.phones.phone.primary").content
     ]
   }
+=end
 
 =begin
   company_info = page.css("p[class=adr]").map{ |company|

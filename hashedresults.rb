@@ -14,8 +14,10 @@ page.css('.result').each do |business|
   business_name = business.css("a[class=business-name]").each do |bn|
   business_address = business.css("p[class=adr]").each do |ba|
   business_phone = business.css("div.phones.phone.primary").each do |bp|
-  business_web = business.css("div.links a").each do |bw|
-    @businesses << {:name => bn.content, :address => ba.content, :phone => bp.content, :website => bw.content }
+  business_web = business.css("div.links a").map { |link| link['href'] }
+  business_web = business.css("div.links a").map{|link| "#{link['href']}"}
+  business_web.each do |bw|
+    @businesses << {:name => bn.content, :address => ba.content, :phone => bp.content, :website => bw }
   end
   end
   end
