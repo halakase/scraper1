@@ -24,13 +24,34 @@ names.each do |el|
 end
 =end
 
+
 =begin
-# get addresses
+# get street addresses
 address = page.css("p[class=adr]")
 address.each do |el|
   puts el.text
 end
 =end
+
+bizstreet = Array.new
+page.css('.result').each do |business|
+business_street = business.search("span[class=street-address]")
+  business_street.each do |bst|
+  puts bst.text
+end
+end
+# puts bizstreet
+
+# get city / region
+# 'Locality', company.search("span[class=locality]").text,
+
+
+# get state
+# 'addressRegion', company.search("span[class=addressRegion]").text,
+
+# get postal code
+# 'postalCode', company.search("span[class=postalCode]").text,
+
 
 =begin
 # get phones
@@ -40,21 +61,16 @@ phones.each do |el|
 end
 =end
 
-# get websites
 =begin
-websites = page.css("div.links a")
-websites.each{|link| puts "#{link['href']}"}
-=end
-
+# get websites
 @webnames = Array.new
 websites = page.css("div.links a").map{|link| "#{link['href']}"}
 websites.each do |bw|
   @webnames << {:webn => bw }
 end
-
 # puts websites
 puts @webnames
-
+=end
 
 =begin
 # write into structures
@@ -101,20 +117,3 @@ company_info = page.css("div.info").map{ |company|
       ]
     }
 =end
-
-# puts company_info
-
-
-# {business_name: ‘blah’, phone: ‘bbla’}
-
-# Merge two structs
-
-=begin
-def struct_join(main, other)
-  mems = main.members + other.members
-  vals = main.values + other.values
-  Struct.new(nil, *mems).new(*vals)
-end
-=end
-
-# This is awesome for doing ruby regex. http://rubular.com/

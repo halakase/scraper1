@@ -12,21 +12,33 @@ end
 @businesses = Array.new
 page.css('.result').each do |business|
   business_name = business.css("a[class=business-name]").each do |bn|
-  business_address = business.css("p[class=adr]").each do |ba|
+    # puts bn.content
+  business_street = business.search("span[class=street-address]")
+    business_street.each do |bst|
+  business_locality = business.search("span[class=locality]")
+    business_locality.each do |bly|
+
+  # business_region = business.search("span[class=addressRegion]")
+    # business_region.each do |brn|
+  # business_zipcode = business.search("span[class=postalCode]")
+    # business_zipcode.each do |bzp|
+  # business_postal = business.search("span[class=postalCode]")
+    # business_postal.each do |bpt|
   business_phone = business.css("div.phones.phone.primary").each do |bp|
   business_web = business.css("div.links a").map { |link| link['href'] }
   business_web = business.css("div.links a").map{|link| "#{link['href']}"}
   business_web.each do |bw|
-    @businesses << {:name => bn.content, :address => ba.content, :phone => bp.content, :website => bw }
+    @businesses << {:Name => bn.content, :Street => bst.text, :Locality => bly.text, :Region => bly.next_element.text, :ZipCode => bly.next_element.next_element.text, :Phone => bp.content, :Website => bw }
   end
   end
   end
   end
-  # business_address = business.css("a[class=business-address]").content
+  end
 end
 
 # display hash result
 puts @businesses
+
 
 # Get headers, the keys for each hash key-value pair
 headers = @businesses[0].keys
